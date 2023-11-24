@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "i": "^0.3.7",
+    "npm": "^10.2.4",
+    "react-router-dom": "^6.19.0",
+    "uniqid": "^5.4.0"
+  }
+}
