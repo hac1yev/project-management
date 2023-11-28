@@ -20,11 +20,16 @@ const TaskItem = ({ title, id }) => {
     e.preventDefault();
 
     dispatch(projectSliceAction.editTask({
-      id: id,
       projectId: projectId,
       newTitle: newTaskTitle
     }));
+    setNewTaskTitle('')
   };
+
+
+  const handleEdited = () => {
+    dispatch(projectSliceAction.getEditId(id))
+  }
 
   const handleChange = (e) => {
     setNewTaskTitle(e.target.value);
@@ -34,7 +39,7 @@ const TaskItem = ({ title, id }) => {
     <li>
         <span>{title}</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <button className='task-item-button' type='button' data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button onClick={handleEdited} className='task-item-button' type='button' data-bs-toggle="modal" data-bs-target="#exampleModal">
             <MdEdit />
           </button>
           <button className='task-item-button' onClick={handleClick}>

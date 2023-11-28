@@ -5,6 +5,7 @@ const initialProjectState = {
     createNewProject: false,
     addTask: false,
     projects: [],
+    selectedId: '',
     selectedProject: {
         id: '',
         title: '',
@@ -38,8 +39,11 @@ export const projectSlice = createSlice({
         },
         editTask(state,action) {
             let selectedProjectIndex = state.projects.findIndex(project => project.id === action.payload.projectId);
-            const selectedTaskIndex = state.projects[selectedProjectIndex].tasks.findIndex(task => task.id === action.payload.id);
+            const selectedTaskIndex = state.projects[selectedProjectIndex].tasks.findIndex(task => task.id === state.selectedId);
             state.projects[selectedProjectIndex].tasks[selectedTaskIndex].title = action.payload.newTitle; 
+        },
+        getEditId(state,action){
+            state.selectedId = action.payload
         }
     }
 });
