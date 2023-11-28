@@ -47,7 +47,7 @@ const AddTask = () => {
                 <h2>Tasks</h2>
                 <div className='input-group'>
                     <input type="text" value={taskRef} onChange={(e) => setTaskRef(e.target.value)} className='form-control' />
-                    <button>Add Task</button>
+                    <button className='add-task-form-button'>Add Task</button>
                 </div>
             </form>
             <AllTasks />

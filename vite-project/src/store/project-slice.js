@@ -25,6 +25,7 @@ export const projectSlice = createSlice({
         deleteProject(state,action){
             let findedProject = state.projects.filter(project => project.id !== action.payload);
             state.projects = [...findedProject];
+            state.projectCount -= 1;
         },
         addProjectTask(state,action) {
             let selectedProjectIndex = state.projects.findIndex(project => project.id === action.payload.projectId);
@@ -34,6 +35,11 @@ export const projectSlice = createSlice({
             let selectedProjectIndex = state.projects.findIndex(project => project.id === action.payload.projectId);
             const updatedTasks = state.projects[selectedProjectIndex].tasks.filter(task => task.id !== action.payload.id);
             state.projects[selectedProjectIndex].tasks = updatedTasks;
+        },
+        editTask(state,action) {
+            let selectedProjectIndex = state.projects.findIndex(project => project.id === action.payload.projectId);
+            const selectedTask = state.projects[selectedProjectIndex].tasks.find(task => task.id === action.payload.id);
+            state.projects[selectedProjectIndex].tasks = [...state.projects[selectedProjectIndex].tasks, {...selectedTask, title: action.payload.newTitle}]; 
         }
     }
 });
