@@ -38,8 +38,8 @@ export const projectSlice = createSlice({
         },
         editTask(state,action) {
             let selectedProjectIndex = state.projects.findIndex(project => project.id === action.payload.projectId);
-            const selectedTask = state.projects[selectedProjectIndex].tasks.find(task => task.id === action.payload.id);
-            state.projects[selectedProjectIndex].tasks = [...state.projects[selectedProjectIndex].tasks, {...selectedTask, title: action.payload.newTitle}]; 
+            const selectedTaskIndex = state.projects[selectedProjectIndex].tasks.findIndex(task => task.id === action.payload.id);
+            state.projects[selectedProjectIndex].tasks[selectedTaskIndex].title = action.payload.newTitle; 
         }
     }
 });
