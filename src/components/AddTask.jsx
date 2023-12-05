@@ -5,6 +5,8 @@ import { projectSliceAction } from '../store/project-slice';
 import uniqid from 'uniqid';
 import { useParams } from 'react-router-dom';
 
+import { toast } from 'react-toastify';
+
 const AddTask = () => {
     const { projectId } = useParams();
     const projects = useSelector(state => state.projectReducer.projects);
@@ -28,6 +30,9 @@ const AddTask = () => {
         }
 
         setTaskRef("");
+        toast.info("Task added!",{
+            theme: "colored",
+        });
     };
 
     const handleDeleteProject = () => {

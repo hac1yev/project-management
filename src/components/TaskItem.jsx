@@ -1,11 +1,10 @@
 import React, { memo, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { projectSliceAction } from '../store/project-slice';
 import { useParams } from 'react-router-dom';
 import { MdDelete, MdEdit } from "react-icons/md";
 
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const TaskItem = ({ title, id }) => {
   const [newTaskTitle,setNewTaskTitle] = useState("");
@@ -17,7 +16,9 @@ const TaskItem = ({ title, id }) => {
       id: id,
       projectId: projectId
     }));
-    toast.error("Task deleted!");
+    toast.error("Task deleted!", {
+      theme: "colored",
+    });
   };
 
   const handleEditSubmit = (e) => {
@@ -28,7 +29,9 @@ const TaskItem = ({ title, id }) => {
       newTitle: newTaskTitle
     }));
     setNewTaskTitle('');
-    toast.success("Task edited!");
+    toast.success("Task edited!", {
+      theme: "colored",
+    });
   };
 
 
