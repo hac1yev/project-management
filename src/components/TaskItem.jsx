@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 
 const TaskItem = ({ title, id }) => {
   const [newTaskTitle,setNewTaskTitle] = useState("");
+  const [isModalOpen,setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const { projectId } = useParams();
 
@@ -31,12 +32,14 @@ const TaskItem = ({ title, id }) => {
     toast.success("Task edited!", {
       theme: "colored",
     });
+    setIsModalOpen(false);
   };
 
   const handleEdited = () => {
+    setIsModalOpen(true);
     dispatch(projectSliceAction.getEditId(id));
     setNewTaskTitle(title);
-  }
+  };
 
   const handleChange = (e) => {
     setNewTaskTitle(e.target.value);
@@ -46,7 +49,7 @@ const TaskItem = ({ title, id }) => {
     <li>
         <span>{title}</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <button onClick={handleEdited} className='task-item-button' type='button' data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button onClick={handleEdited} className='task-item-button' type='button'>
             <MdEdit />
           </button>
           <button className='task-item-button' onClick={handleDelete}>
@@ -55,23 +58,21 @@ const TaskItem = ({ title, id }) => {
         </div>
 
         {/* MODAL */}
-        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog">
-            <form className="modal-content" onSubmit={handleEditSubmit}>
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">New task title</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div className="modal-body">
-                <input value={newTaskTitle} type="text" onChange={handleChange} className='form-control' placeholder='Enter new task title!' />
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" className="btn" data-bs-dismiss="modal" style={{ backgroundColor: '#121716', color: '#fff' }}>Save changes</button>
-              </div>
-            </form>
-          </div>
-        </div>
+        {isModalOpen && <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+          <form onSubmit={handleEditSubmit} onClick={(e) => e.stopPropagation()}>
+            <div className='modal-head'>
+              <h5 className="modal-title">New task title</h5>
+              <button type="button" className="btn-close" onClick={() => setIsModalOpen(false)}></button>
+            </div>
+            <div className='modal-title'>
+              <input value={newTaskTitle} type="text" onChange={handleChange} className='form-control' placeholder='Enter new task title!' />
+            </div>
+            <div className='modal-foot'>
+              <button type="button" className="btn btn-outline-secondary" onClick={() => setIsModalOpen(false)}>Close</button>
+              <button type="submit" className="btn" style={{ backgroundColor: '#121716', color: '#fff' }}>Save changes</button>
+            </div>
+          </form>
+        </div>}
     </li>
   )
 }

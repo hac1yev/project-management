@@ -53,7 +53,7 @@ const AddTask = () => {
             <form className='mt-4' onSubmit={handleSubmit}>
                 <h2>Tasks</h2>
                 <div className='input-group'>
-                    <input type="text" value={taskRef} onChange={(e) => setTaskRef(e.target.value)} className='form-control' />
+                    <input placeholder='Enter task title!' type="text" value={taskRef} onChange={(e) => setTaskRef(e.target.value)} className='form-control' />
                     <button className='add-task-form-button'>Add Task</button>
                 </div>
             </form>
