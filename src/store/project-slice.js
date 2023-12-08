@@ -43,7 +43,7 @@ export const projectSlice = createSlice({
             state.projects[selectedProjectIndex].tasks[selectedTaskIndex].title = action.payload.newTitle; 
         },
         getEditId(state,action){
-            state.selectedId = action.payload
+            state.selectedId = action.payload;
         }
     }
 });
