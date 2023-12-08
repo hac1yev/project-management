@@ -3,13 +3,14 @@ import AllTasks from './AllTasks';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectSliceAction } from '../store/project-slice';
 import uniqid from 'uniqid';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 
 const AddTask = () => {
     const { projectId } = useParams();
     const projects = useSelector(state => state.projectReducer.projects);
+    const navigate = useNavigate();
 
     let findedProject = projects.find(item => item.id === projectId);
 
@@ -37,6 +38,7 @@ const AddTask = () => {
 
     const handleDeleteProject = () => {
         dispatch(projectSliceAction.deleteProject(projectId));
+        navigate("/");
     };
 
     return (

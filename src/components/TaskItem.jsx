@@ -28,15 +28,14 @@ const TaskItem = ({ title, id }) => {
       projectId: projectId,
       newTitle: newTaskTitle
     }));
-    setNewTaskTitle('');
     toast.success("Task edited!", {
       theme: "colored",
     });
   };
 
-
   const handleEdited = () => {
     dispatch(projectSliceAction.getEditId(id));
+    setNewTaskTitle(title);
   }
 
   const handleChange = (e) => {
@@ -64,7 +63,7 @@ const TaskItem = ({ title, id }) => {
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div className="modal-body">
-                <input type="text" onChange={handleChange} className='form-control' placeholder='Enter new task title!' />
+                <input value={newTaskTitle} type="text" onChange={handleChange} className='form-control' placeholder='Enter new task title!' />
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>

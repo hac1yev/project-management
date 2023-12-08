@@ -13,7 +13,6 @@ const AllTasks = () => {
       return projects.find(item => item.id === projectId);
     }, [projects, projectId]);
 
-
   return (
     <ul className='all-tasks mt-4'>
         {!selectedTask ? defaultProject.tasks.map((task) => <TaskItem key={task.id} id={task.id} title={task.title} />) : selectedTask.tasks.map((task) => <TaskItem key={task.id} id={task.id} title={task.title} />)}
